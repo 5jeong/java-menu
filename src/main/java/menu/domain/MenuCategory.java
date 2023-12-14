@@ -20,12 +20,10 @@ public enum MenuCategory {
     }
 
     public static MenuCategory getCategoryByNumber(int categoryNumber) {
-        for (MenuCategory category : values()) {
-            if (category.getCategoryNumber() == categoryNumber) {
-                return category;
-            }
-        }
-        return null;
+        return Arrays.stream(values())
+                .filter(category -> category.getCategoryNumber() == categoryNumber)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 categoryNumber가 없습니다: " ));
     }
 
     public List<String> getMenuList() {
